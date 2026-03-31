@@ -26,9 +26,12 @@
       animation: fadeIn 1.8s ease both;
     }
 
-    .flower-svg {
+    .flower-img {
       width: min(140px, 24vw);
       height: auto;
+      mix-blend-mode: multiply;
+      animation: sway 5s ease-in-out infinite;
+      transform-origin: 52% 100%;
     }
 
     .name {
@@ -55,103 +58,16 @@
     }
 
     @keyframes sway {
-      0%, 100% { transform: rotate(-1deg);   }
-      50%       { transform: rotate(0.9deg); }
-    }
-    .flower-g {
-      animation: sway 5s ease-in-out infinite;
-      transform-origin: 100px 465px;
+      0%, 100% { transform: rotate(-1.5deg); }
+      50%       { transform: rotate(1.2deg);  }
     }
   </style>
 </head>
 <body>
   <div class="logo-wrap">
-
-    <!--
-      viewBox: 200 × 500
-      Flower centre: (100, 108)
-      Spindle loop: top (100,188) → bottom tip (100,478)
-      Leaf attachment: ~(100, 300)
-    -->
-    <svg class="flower-svg" viewBox="0 0 200 500" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <!--
-          Petal: drawn as a closed teardrop loop.
-          Fill = same yellow as halo → appears as outline-only loop.
-          Origin at (0,0) = flower centre; tip points upward.
-        -->
-        <path id="petal"
-          d="M0,-10 C-20,-26 -22,-68 0,-86 C22,-68 20,-26 0,-10 Z"
-          fill="#f5c83a"
-          stroke="#2c5f52" stroke-width="5.8"
-          stroke-linejoin="round" stroke-linecap="round"/>
-      </defs>
-
-      <g class="flower-g">
-
-        <!-- ── STEM: straight segment ──────────────────────────── -->
-        <path d="M100 184 C101 212, 99 248, 100 282"
-              fill="none" stroke="#2c5f52" stroke-width="5.8" stroke-linecap="round"/>
-
-        <!-- ── SPINDLE LOOP at bottom of stem ─────────────────── -->
-        <path d="M100 282 C120 314, 122 428, 100 478
-                 C78  428,  78  314, 100 282 Z"
-              fill="none" stroke="#2c5f52" stroke-width="5.8"
-              stroke-linejoin="round" stroke-linecap="round"/>
-
-        <!-- ── LEAF ───────────────────────────────────────────── -->
-        <!-- outer shape: teardrop pointing lower-left -->
-        <path d="M98 302 C80 284, 48 278, 36 308
-                 C48 340, 84 340, 98 316 Z"
-              fill="#5cb84a" stroke="#2c5f52" stroke-width="5.5"
-              stroke-linejoin="round" stroke-linecap="round"/>
-        <!-- leaf vein -->
-        <line x1="97" y1="315" x2="38" y2="309"
-              stroke="#2c5f52" stroke-width="2.8" stroke-linecap="round"/>
-
-        <!-- ── FLOWER HEAD ─────────────────────────────────────── -->
-        <!-- yellow halo disc -->
-        <circle cx="100" cy="108" r="74" fill="#f5c83a"/>
-
-        <!-- 10 petal loops -->
-        <g transform="translate(100,108)">
-          <use href="#petal" transform="rotate(0)"/>
-          <use href="#petal" transform="rotate(36)"/>
-          <use href="#petal" transform="rotate(72)"/>
-          <use href="#petal" transform="rotate(108)"/>
-          <use href="#petal" transform="rotate(144)"/>
-          <use href="#petal" transform="rotate(180)"/>
-          <use href="#petal" transform="rotate(216)"/>
-          <use href="#petal" transform="rotate(252)"/>
-          <use href="#petal" transform="rotate(288)"/>
-          <use href="#petal" transform="rotate(324)"/>
-        </g>
-
-        <!-- radial spokes in centre (8 spokes, 45° apart) -->
-        <g transform="translate(100,108)" stroke="#2c5f52" stroke-width="4" stroke-linecap="round">
-          <line x1="0" y1="-28" x2="0"   y2="-56" transform="rotate(0)"/>
-          <line x1="0" y1="-28" x2="0"   y2="-56" transform="rotate(45)"/>
-          <line x1="0" y1="-28" x2="0"   y2="-56" transform="rotate(90)"/>
-          <line x1="0" y1="-28" x2="0"   y2="-56" transform="rotate(135)"/>
-          <line x1="0" y1="-28" x2="0"   y2="-56" transform="rotate(180)"/>
-          <line x1="0" y1="-28" x2="0"   y2="-56" transform="rotate(225)"/>
-          <line x1="0" y1="-28" x2="0"   y2="-56" transform="rotate(270)"/>
-          <line x1="0" y1="-28" x2="0"   y2="-56" transform="rotate(315)"/>
-        </g>
-
-        <!-- centre outer ring -->
-        <circle cx="100" cy="108" r="28"
-                fill="#f5c83a" stroke="#2c5f52" stroke-width="5.5"/>
-        <!-- centre inner ring -->
-        <circle cx="100" cy="108" r="14"
-                fill="#f5c83a" stroke="#2c5f52" stroke-width="4"/>
-
-      </g>
-    </svg>
-
+    <img class="flower-img" src="image.png" alt="Taevasilma lill">
     <span class="name">Taevasilma</span>
     <span class="est">est 2012</span>
-
   </div>
 </body>
 </html>
