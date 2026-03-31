@@ -16,7 +16,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: 'Josefin Sans', sans-serif;
       overflow: hidden;
     }
 
@@ -39,7 +38,7 @@
       letter-spacing: 0.08em;
       color: #2c5f52;
       line-height: 1;
-      margin-top: 0.15em;
+      margin-top: 0.2em;
     }
 
     .est {
@@ -59,51 +58,63 @@
       0%, 100% { transform: rotate(-1deg);   }
       50%       { transform: rotate(0.9deg); }
     }
-
     .flower-g {
       animation: sway 5s ease-in-out infinite;
-      transform-origin: 100px 380px;
+      transform-origin: 100px 465px;
     }
-
-    @keyframes shimmer {
-      0%, 100% { opacity: 1; }
-      50%       { opacity: 0.9; }
-    }
-    .petals { animation: shimmer 4s ease-in-out infinite; }
   </style>
 </head>
 <body>
   <div class="logo-wrap">
 
-    <svg class="flower-svg" viewBox="0 0 200 420" xmlns="http://www.w3.org/2000/svg">
+    <!--
+      viewBox: 200 × 500
+      Flower centre: (100, 108)
+      Spindle loop: top (100,188) → bottom tip (100,478)
+      Leaf attachment: ~(100, 300)
+    -->
+    <svg class="flower-svg" viewBox="0 0 200 500" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <!-- Wide rounded petal matching reference logo -->
+        <!--
+          Petal: drawn as a closed teardrop loop.
+          Fill = same yellow as halo → appears as outline-only loop.
+          Origin at (0,0) = flower centre; tip points upward.
+        -->
         <path id="petal"
-              d="M0,-72 C28,-60 30,-28 0,-18 C-30,-28 -28,-60 0,-72"
-              fill="#f5c83a" stroke="#2c5f52" stroke-width="2.6"
-              stroke-linejoin="round" stroke-linecap="round"/>
+          d="M0,-10 C-20,-26 -22,-68 0,-86 C22,-68 20,-26 0,-10 Z"
+          fill="#f5c83a"
+          stroke="#2c5f52" stroke-width="5.8"
+          stroke-linejoin="round" stroke-linecap="round"/>
       </defs>
 
       <g class="flower-g">
 
-        <!-- Stem -->
-        <path d="M100 148 C102 195, 97 258, 100 308 C102 340, 104 362, 100 390"
-              stroke="#2c5f52" stroke-width="4.2" stroke-linecap="round" fill="none"/>
+        <!-- ── STEM: straight segment ──────────────────────────── -->
+        <path d="M100 184 C101 212, 99 248, 100 282"
+              fill="none" stroke="#2c5f52" stroke-width="5.8" stroke-linecap="round"/>
 
-        <!-- Leaf: filled teardrop pointing lower-left -->
-        <path d="M98 278 C82 262, 60 250, 50 234 C64 244, 84 258, 97 270"
-              fill="#5cb84a" stroke="#2c5f52" stroke-width="2.8"
-              stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- ── SPINDLE LOOP at bottom of stem ─────────────────── -->
+        <path d="M100 282 C120 314, 122 428, 100 478
+                 C78  428,  78  314, 100 282 Z"
+              fill="none" stroke="#2c5f52" stroke-width="5.8"
+              stroke-linejoin="round" stroke-linecap="round"/>
 
-        <!-- Stem-bottom bud oval -->
-        <ellipse cx="100" cy="393" rx="5" ry="9"
-                 fill="none" stroke="#2c5f52" stroke-width="2.5"/>
+        <!-- ── LEAF ───────────────────────────────────────────── -->
+        <!-- outer shape: teardrop pointing lower-left -->
+        <path d="M98 302 C80 284, 48 278, 36 308
+                 C48 340, 84 340, 98 316 Z"
+              fill="#5cb84a" stroke="#2c5f52" stroke-width="5.5"
+              stroke-linejoin="round" stroke-linecap="round"/>
+        <!-- leaf vein -->
+        <line x1="97" y1="315" x2="38" y2="309"
+              stroke="#2c5f52" stroke-width="2.8" stroke-linecap="round"/>
 
-        <!-- Yellow halo disc behind petals -->
-        <circle cx="100" cy="100" r="54" fill="#f5c83a" stroke="none"/>
+        <!-- ── FLOWER HEAD ─────────────────────────────────────── -->
+        <!-- yellow halo disc -->
+        <circle cx="100" cy="108" r="74" fill="#f5c83a"/>
 
-        <!-- 10 petals rotated around center -->
-        <g class="petals" transform="translate(100,100)">
+        <!-- 10 petal loops -->
+        <g transform="translate(100,108)">
           <use href="#petal" transform="rotate(0)"/>
           <use href="#petal" transform="rotate(36)"/>
           <use href="#petal" transform="rotate(72)"/>
@@ -116,9 +127,24 @@
           <use href="#petal" transform="rotate(324)"/>
         </g>
 
-        <!-- Center disc -->
-        <circle cx="100" cy="100" r="28" fill="#f5c83a" stroke="#2c5f52" stroke-width="3"/>
-        <circle cx="100" cy="100" r="14" fill="#f0b820" stroke="#2c5f52" stroke-width="2"/>
+        <!-- radial spokes in centre (8 spokes, 45° apart) -->
+        <g transform="translate(100,108)" stroke="#2c5f52" stroke-width="4" stroke-linecap="round">
+          <line x1="0" y1="-28" x2="0"   y2="-56" transform="rotate(0)"/>
+          <line x1="0" y1="-28" x2="0"   y2="-56" transform="rotate(45)"/>
+          <line x1="0" y1="-28" x2="0"   y2="-56" transform="rotate(90)"/>
+          <line x1="0" y1="-28" x2="0"   y2="-56" transform="rotate(135)"/>
+          <line x1="0" y1="-28" x2="0"   y2="-56" transform="rotate(180)"/>
+          <line x1="0" y1="-28" x2="0"   y2="-56" transform="rotate(225)"/>
+          <line x1="0" y1="-28" x2="0"   y2="-56" transform="rotate(270)"/>
+          <line x1="0" y1="-28" x2="0"   y2="-56" transform="rotate(315)"/>
+        </g>
+
+        <!-- centre outer ring -->
+        <circle cx="100" cy="108" r="28"
+                fill="#f5c83a" stroke="#2c5f52" stroke-width="5.5"/>
+        <!-- centre inner ring -->
+        <circle cx="100" cy="108" r="14"
+                fill="#f5c83a" stroke="#2c5f52" stroke-width="4"/>
 
       </g>
     </svg>
